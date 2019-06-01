@@ -4,9 +4,9 @@ import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class KafkaConsumerFactory {
 
@@ -49,8 +49,8 @@ public class KafkaConsumerFactory {
 
     public static void shutdown() {
         try {
-            diveoConsumer.close(10, TimeUnit.SECONDS);
-            alogConsumer.close(10, TimeUnit.SECONDS);
+            diveoConsumer.close(Duration.ofSeconds(10));
+            alogConsumer.close(Duration.ofSeconds(10));
         } catch (Exception e) {
             e.printStackTrace();
         }
