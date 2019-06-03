@@ -9,6 +9,7 @@ import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
+import java.time.Duration;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -59,7 +60,7 @@ public class KafkaTestMain {
 
     private static void receiveMessage(Consumer<String, String> consumer) {
         try {
-            ConsumerRecords<String, String> records = consumer.poll(500);
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(500));
 
             for (ConsumerRecord<String, String> record : records) {
                 System.out.println(ToStringBuilder.reflectionToString(record, ToStringStyle.SIMPLE_STYLE));

@@ -25,7 +25,7 @@ public class KafkaProducerFactory {
         props.put("acks", "1");
         props.put("retries", 5);
         props.put("batch.size", 16384);
-        props.put("linger.ms", 10L);
+        props.put("linger.ms", 10); // integer
         props.put("buffer.memory", 33554432L);
         props.put("request.timeout.ms", 60000);
         props.put("compression.type", "gzip");
