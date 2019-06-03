@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="true" scan="true" scanPeriod="10 minutes">
+    <jmxConfigurator />
+
+    <property name="LOG_PATH" value="log/" />
+    <property name="DEFAULT_PATTERN" value="%highlight([%-5level]) %green([%date{ISO8601}]) %yellow([%X{stamp}]) %magenta([%class{1}->%method:%line]) | %msg%n" />
+    <property name="DEFAULT_MAX_FILE_SIZE" value="100MB" />
+    <property name="DEFAULT_MAX_HISTORY" value="45" />
+    <property name="DEFAULT_ASYNC_QUEUE_SIZE" value="256"/>
+
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are by default assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <encoder>
+            <pattern>${DEFAULT_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ap_system_tools" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}system_tools.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+              <!-- rollover daily -->
+              <fileNamePattern>${LOG_PATH}system_tools.log.k2m.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+              <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>${DEFAULT_MAX_FILE_SIZE}</maxFileSize>
+              </timeBasedFileNamingAndTriggeringPolicy>
+              <maxHistory>${DEFAULT_MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+              <pattern>${DEFAULT_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ap_system_tools_async" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>${DEFAULT_ASYNC_QUEUE_SIZE}</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref="ap_system_tools"/>
+    </appender>
+
+    <logger name="org" level="INFO" additivity="false">
+        <appender-ref ref="ap_system_tools_async" />
+    </logger>
+
+    <logger name="ch.qos.logback" level="INFO" additivity="false">
+        <appender-ref ref="ap_system_tools_async" />
+    </logger>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>
