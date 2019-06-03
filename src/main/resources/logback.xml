@@ -20,16 +20,16 @@
     <appender name="ap_system_tools" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}system_tools.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-              <!-- rollover daily -->
-              <fileNamePattern>${LOG_PATH}system_tools.log.k2m.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
-              <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_PATH}system_tools.log.k2m.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- or whenever the file size reaches 100MB -->
                 <maxFileSize>${DEFAULT_MAX_FILE_SIZE}</maxFileSize>
-              </timeBasedFileNamingAndTriggeringPolicy>
-              <maxHistory>${DEFAULT_MAX_HISTORY}</maxHistory>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>${DEFAULT_MAX_HISTORY}</maxHistory>
         </rollingPolicy>
         <encoder>
-              <pattern>${DEFAULT_PATTERN}</pattern>
+            <pattern>${DEFAULT_PATTERN}</pattern>
         </encoder>
     </appender>
 
