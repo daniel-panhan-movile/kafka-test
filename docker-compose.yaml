@@ -1,0 +1,23 @@
+version: '3'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    hostname: zookeeper
+  kafka:
+    image: wurstmeister/kafka
+    command: [start-kafka.sh]
+    ports:
+      - "9092:9092"
+    expose:
+      - 9092
+    hostname: kafka
+    environment:
+      KAFKA_CREATE_TOPICS: "MOVILE.CORP.MT.ROUTED:1:1"
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1 # docker-machine ip
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_JVM_PERFORMANCE_OPTS: " -Xmx256m -Xms256m"
+    depends_on:
+      - "zookeeper"

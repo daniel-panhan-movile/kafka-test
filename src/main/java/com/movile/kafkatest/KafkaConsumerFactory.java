@@ -31,10 +31,10 @@ public class KafkaConsumerFactory {
         props.put("group.id", "TEST_GROUP_ID");
         props.put("auto.offset.reset", "earliest");
         props.put("enable.auto.commit", "true");
-        props.put("request.timeout.ms", 190_000);
-        props.put("session.timeout.ms", 180_000);
+        props.put("request.timeout.ms", 60_000);
+        props.put("session.timeout.ms", 10_000);
         props.put("max.poll.records", 1_000);
-        props.put("heartbeat.interval.ms", 10_000);
+        props.put("heartbeat.interval.ms", 3_000);
 
         return props;
     }

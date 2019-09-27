@@ -49,6 +49,7 @@ public class KafkaTestMain {
     private static void sendMessage(Producer<String, String> producer, String key, String value) {
         try {
             ProducerRecord<String, String> record = new ProducerRecord<>("MOVILE.CORP.TEST", key, value);
+            //record.headers().add("header1", "value_header1".getBytes());
             Future<RecordMetadata> future = producer.send(record);
 
             RecordMetadata recordMetadata = future.get(10, TimeUnit.SECONDS);
@@ -64,6 +65,7 @@ public class KafkaTestMain {
 
             for (ConsumerRecord<String, String> record : records) {
                 System.out.println(ToStringBuilder.reflectionToString(record, ToStringStyle.SIMPLE_STYLE));
+                Thread.sleep(600_000);
             }
 
         } catch (Exception e) {

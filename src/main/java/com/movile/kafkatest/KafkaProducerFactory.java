@@ -22,6 +22,7 @@ public class KafkaProducerFactory {
     private static Properties getProperties(String servers) {
         Properties props = new Properties();
         props.put("bootstrap.servers", servers);
+        props.put("enable.auto.commit", false);
         props.put("acks", "1");
         props.put("retries", 5);
         props.put("batch.size", 16384);
