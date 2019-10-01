@@ -14,7 +14,7 @@ services:
       - 9092
     hostname: kafka
     environment:
-      KAFKA_CREATE_TOPICS: "MOVILE.CORP.MT.ROUTED:1:1"
+      KAFKA_CREATE_TOPICS: "MOVILE.CORP.TEST:1000:1"
       KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1 # docker-machine ip
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_PORT: 9092
